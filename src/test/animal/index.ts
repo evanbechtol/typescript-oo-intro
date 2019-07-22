@@ -2,24 +2,27 @@ import {Animal} from "../../entities/animal/animal";
 import {expect} from "chai";
 import "mocha";
 
-describe("Animal Entity", () => {
-    let Buddy;
-    const ANIMAL_TO_CREATE = {age: 0.5, gender: "male", name: "Buddy"};
+let Buddy;
+const ANIMAL_TO_CREATE = {age: 0.5, gender: "male", name: "Buddy"};
 
+before(() => {
+    Buddy = animalFactory(ANIMAL_TO_CREATE.age, ANIMAL_TO_CREATE.gender, ANIMAL_TO_CREATE.name);
+});
+
+describe("Animal Entity", () => {
     it("Should create a valid Animal instance", () => {
-        Buddy = animalFactory(ANIMAL_TO_CREATE.age, ANIMAL_TO_CREATE.gender, ANIMAL_TO_CREATE.name);
         expect(Buddy).to.be.an.instanceOf(Animal);
     });
 
-    it(`Should have age of ${ANIMAL_TO_CREATE.age}`, () => {
+    it("Should have a valid age", () => {
         expect(Buddy).to.have.deep.property("age", ANIMAL_TO_CREATE.age);
     });
 
-    it(`Should have gender of ${ANIMAL_TO_CREATE.gender}`, () => {
+    it("Should have a valid gender", () => {
         expect(Buddy).to.have.deep.property("gender", ANIMAL_TO_CREATE.gender);
     });
 
-    it(`Should have name of ${ANIMAL_TO_CREATE.name}`, () => {
+    it("Should have a valid name", () => {
         expect(Buddy).to.have.deep.property("name", ANIMAL_TO_CREATE.name);
     });
 });
