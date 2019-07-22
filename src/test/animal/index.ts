@@ -4,13 +4,14 @@ import {expect} from "chai";
 import "mocha";
 
 let Buddy;
-const ANIMAL_TO_CREATE = {age: 0.5, gender: "male", name: "Buddy"};
+const ANIMAL_TO_CREATE = {age: 0.5, gender: "male", name: "Buddy", sound: "woof"};
 
 before(() => {
-    Buddy = animalFactory(ANIMAL_TO_CREATE.age, ANIMAL_TO_CREATE.gender, ANIMAL_TO_CREATE.name);
+    Buddy = animalFactory(ANIMAL_TO_CREATE.age, ANIMAL_TO_CREATE.gender, ANIMAL_TO_CREATE.name, ANIMAL_TO_CREATE.sound);
 });
 
 describe("Animal Entity", () => {
+
     describe("Should have methods", () => {
         it("Should have method ageIsValid", () => {
             expect(Animal).itself.to.respondTo("ageIsValid");
@@ -22,6 +23,14 @@ describe("Animal Entity", () => {
 
         it("Should have method nameIsValid", () => {
             expect(Animal).itself.to.respondTo("nameIsValid");
+        });
+
+        it("Should have method soundIsValid", () => {
+            expect(Animal).itself.to.respondTo("soundIsValid");
+        });
+
+        it("Should have method makeSound", () => {
+            expect(Buddy).itself.to.respondTo("makeSound");
         });
     });
 
@@ -40,6 +49,15 @@ describe("Animal Entity", () => {
 
         it("Should have a valid name", () => {
             expect(Buddy).to.have.deep.property("name", ANIMAL_TO_CREATE.name);
+        });
+
+        it("Should have a sound", () => {
+            expect(Buddy).to.have.deep.property("sound", ANIMAL_TO_CREATE.sound);
+        });
+
+        it("Should make a sound", () => {
+            const expectedSound = "woofwoof";
+            expect(Buddy.makeSound(2)).to.equal(expectedSound);
         });
     });
 
@@ -83,7 +101,8 @@ describe("Animal Entity", () => {
  * @param age {number} Age of animal
  * @param gender {string} Gender of animal
  * @param name {string} Name of animal
+ * @param sound {string} Optional: Sound animal can make
  */
-function animalFactory(age: number, gender: string, name: string) {
-    return new Animal(age, gender, name);
+function animalFactory(age: number, gender: string, name: string, sound?: string) {
+    return new Animal(age, gender, name, sound);
 }
