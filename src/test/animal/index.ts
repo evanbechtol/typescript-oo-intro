@@ -1,4 +1,5 @@
 import {Animal} from "../../entities/animal/animal";
+import errorMessages from "../../entities/animal/errorMessages";
 import {expect} from "chai";
 import "mocha";
 
@@ -24,6 +25,38 @@ describe("Animal Entity", () => {
 
     it("Should have a valid name", () => {
         expect(Buddy).to.have.deep.property("name", ANIMAL_TO_CREATE.name);
+    });
+
+    it("Should throw error when invalid age is passed", () => {
+        try {
+            Buddy.age = -1;
+        } catch (e) {
+            expect(e.message).to.equal(errorMessages.ageInvalid);
+        }
+    });
+
+    it("Should throw error when invalid gender is passed", () => {
+        try {
+            Buddy.gender = "SomethingIncorrect";
+        } catch (e) {
+            expect(e.message).to.equal(errorMessages.genderInvalid);
+        }
+    });
+
+    it("Should throw error when invalid name is less than 1 character", () => {
+        try {
+            Buddy.name = "";
+        } catch (e) {
+            expect(e.message).to.equal(errorMessages.nameInvalid);
+        }
+    });
+
+    it("Should throw error when invalid name is greater than 20 characters", () => {
+        try {
+            Buddy.name = "HereIsAReallyLongNameThatShouldNotBeSetToObject";
+        } catch (e) {
+            expect(e.message).to.equal(errorMessages.nameInvalid);
+        }
     });
 });
 
