@@ -1,7 +1,7 @@
-import {Animal} from "../../entities/animal/animal";
-import errorMessages from "../../entities/animal/errorMessages";
 import {expect} from "chai";
 import "mocha";
+import {Animal} from "../../entities/animal/animal";
+import errorMessages from "../../entities/animal/errorMessages";
 
 let Buddy;
 const ANIMAL_TO_CREATE = {age: 0.5, gender: "male", name: "Buddy", sound: "woof"};
