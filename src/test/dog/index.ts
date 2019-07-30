@@ -35,6 +35,22 @@ describe("Dog Entity", () => {
             const expectedSound = "Woof";
             expect(Buddy.makeSound(1)).to.equal(expectedSound);
         });
+
+        it ("Should push breed as string to array", () => {
+            const breedToPush = "Chihuahua";
+            const expectedBreeds = [...DOG_TO_CREATE.breeds, breedToPush];
+
+            Buddy.breeds = breedToPush;
+            expect(Buddy.breeds).to.deep.equal(expectedBreeds);
+        });
+
+        it ("Should not push a duplicate breed to array", () => {
+            const breedToPush = "Chihuahua";
+            const expectedBreeds = Buddy.breeds;
+
+            Buddy.breeds = breedToPush;
+            expect(Buddy.breeds).to.deep.equal(expectedBreeds);
+        });
     });
 });
 
